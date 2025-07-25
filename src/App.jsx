@@ -61,6 +61,9 @@ const ArrowDownTrayIcon = ({ className = 'w-6 h-6' }) => (
 const BkashIcon = () => <svg width="40" height="40" viewBox="0 0 40 40"><path fill="#D82A7D" d="M15.38 3.8h11.16l-3.5 11.2h-4.16zM27.22 3.8h11.16l-7.66 22.12h-7.62zM1.62 3.8h11.16L5.12 25.92H1.62zM15.98 15.6h11.16l-3.5 10.32h-4.16z"></path></svg>;
 const NagadIcon = () => <svg width="40" height="40" viewBox="0 0 40 40"><path fill="#F54D4D" d="M20 0C9 0 0 9 0 20s9 20 20 20 20-9 20-20S31 0 20 0zm4.5 24.8l-8.3 4.2c-.4.2-.8 0-1-.4l-4.2-8.3c-.2-.4 0-.8.4-1l8.3-4.2c.4-.2.8 0 1 .4l4.2 8.3c.2.4 0 .8-.4 1z"></path></svg>;
 const RocketIcon = () => <svg width="40" height="40" viewBox="0 0 40 40"><path fill="#8A2BE2" d="M20 0L0 10l20 30L40 10zM20 15l10 5-10 15-10-15z"></path></svg>;
+const VisaIcon = () => <svg width="40" height="25" viewBox="0 0 40 25"><path fill="#1A1F71" d="M38.4 2.2c-.2-.5-.6-.8-1.2-.8H2.8c-.6 0-1 .3-1.2.8L0 6.3v12.4c0 .6.4 1 1 1h38c.6 0 1-.4 1-1V6.3L38.4 2.2z"></path><path fill="#F7B600" d="M10 12.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"></path></svg>;
+const MastercardIcon = () => <svg width="40" height="25" viewBox="0 0 40 25"><circle cx="12.5" cy="12.5" r="12.5" fill="#EB001B"></circle><circle cx="27.5" cy="12.5" r="12.5" fill="#F79E1B"></circle><path fill="#FF5F00" d="M20 12.5a12.5 12.5 0 01-7.5-11.5 12.5 12.5 0 0115 0A12.5 12.5 0 0120 12.5z"></path></svg>;
+const AmexIcon = () => <svg width="40" height="25" viewBox="0 0 40 25"><rect width="40" height="25" rx="2.5" fill="#006FCF"></rect><text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">AMEX</text></svg>;
 
 
 // --- MOCK DATA ---
@@ -178,42 +181,33 @@ const Header = () => {
                             </button>
                         </div>
                         
-                        {/* Desktop Search Bar */}
-                        <div className="hidden md:flex flex-1 max-w-xl">
-                            <form onSubmit={handleSearchSubmit} className="w-full flex">
+                        <div className="hidden md:flex items-center gap-6">
+                            <button onClick={() => handleLinkClick({ page: 'home' })} className="font-sans text-stone-300 hover:text-white transition-colors">Home</button>
+                            <button onClick={() => handleLinkClick({ page: 'all-products' })} className="font-sans text-stone-300 hover:text-white transition-colors">All Books</button>
+                            <button onClick={() => handleLinkClick({ page: 'contact' })} className="font-sans text-stone-300 hover:text-white transition-colors">Contact</button>
+                        </div>
+
+                        <div className="flex items-center gap-2 flex-1 justify-end">
+                             <form onSubmit={handleSearchSubmit} className="hidden sm:flex w-full max-w-xs relative">
                                 <input 
                                     type="text"
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
-                                    placeholder="Search for books or authors..."
-                                    className="w-full py-2 px-4 rounded-l-md border-0 text-stone-900 focus:ring-2 focus:ring-inset focus:ring-amber-400"
+                                    placeholder="Search..."
+                                    className="w-full py-2 pl-4 pr-10 rounded-full border-0 bg-stone-700 text-white placeholder-stone-400 focus:ring-2 focus:ring-inset focus:ring-amber-400"
                                 />
-                                <button type="submit" className="bg-amber-400 hover:bg-amber-500 text-stone-900 font-bold py-2 px-4 rounded-r-md transition-colors">
-                                    <SearchIcon className="h-6 w-6"/>
+                                <button type="submit" className="absolute inset-y-0 right-0 flex items-center pr-3 text-stone-400 hover:text-white">
+                                    <SearchIcon className="h-5 w-5"/>
                                 </button>
                             </form>
-                        </div>
-
-                        <div className="flex items-center gap-2">
-                             <div className="hidden md:flex items-center gap-4">
-                                <button onClick={() => handleLinkClick({ page: 'my-library' })} className="font-sans text-stone-300 hover:text-white transition-colors">My Library</button>
-                                <button onClick={() => handleLinkClick({ page: 'wishlist' })} className="relative p-2 text-stone-300 hover:text-white transition-colors">
-                                    <HeartIcon className="h-7 w-7" />
-                                    {wishlistItemCount > 0 && (
-                                        <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-red-700 text-xs font-medium text-white">
-                                            {wishlistItemCount}
-                                        </span>
-                                    )}
-                                </button>
-                                <button onClick={() => handleLinkClick({ page: 'cart' })} className="relative p-2 text-stone-300 hover:text-white transition-colors">
-                                    <ShoppingCartIcon className="h-7 w-7" />
-                                    {cartItemCount > 0 && (
-                                        <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-red-700 text-xs font-medium text-white">
-                                            {cartItemCount}
-                                        </span>
-                                    )}
-                                </button>
-                            </div>
+                            <button onClick={() => handleLinkClick({ page: 'wishlist' })} className="hidden sm:block relative p-2 text-stone-300 hover:text-white transition-colors">
+                                <HeartIcon className="h-7 w-7" />
+                                {wishlistItemCount > 0 && <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-red-700 text-xs font-medium text-white">{wishlistItemCount}</span>}
+                            </button>
+                            <button onClick={() => handleLinkClick({ page: 'cart' })} className="hidden sm:block relative p-2 text-stone-300 hover:text-white transition-colors">
+                                <ShoppingCartIcon className="h-7 w-7" />
+                                {cartItemCount > 0 && <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-red-700 text-xs font-medium text-white">{cartItemCount}</span>}
+                            </button>
                             <div className="md:hidden">
                                 <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2 text-stone-300 hover:text-white">
                                     {isMenuOpen ? <XMarkIcon className="h-7 w-7" /> : <MenuIcon className="h-7 w-7" />}
@@ -240,7 +234,6 @@ const Header = () => {
                     </form>
                     <button onClick={() => handleLinkClick({ page: 'home' })} className="font-serif text-3xl text-white hover:text-amber-300">Home</button>
                     <button onClick={() => handleLinkClick({ page: 'all-products' })} className="font-serif text-3xl text-white hover:text-amber-300">All Books</button>
-                    <button onClick={() => handleLinkClick({ page: 'my-library' })} className="font-serif text-3xl text-white hover:text-amber-300">My Library</button>
                     <button onClick={() => handleLinkClick({ page: 'wishlist' })} className="font-serif text-3xl text-white hover:text-amber-300">Wishlist</button>
                     <button onClick={() => handleLinkClick({ page: 'contact' })} className="font-serif text-3xl text-white hover:text-amber-300">Contact</button>
                     <div className="flex gap-8 mt-4">
@@ -267,7 +260,6 @@ const Footer = () => {
                  <div className="flex justify-center space-x-8 mb-8">
                     <button onClick={() => setView({ page: 'home' })} className="hover:text-white transition-colors">Home</button>
                     <button onClick={() => setView({ page: 'all-products' })} className="hover:text-white transition-colors">All Books</button>
-                    <button onClick={() => setView({ page: 'my-library' })} className="hover:text-white transition-colors">My Library</button>
                     <button onClick={() => setView({ page: 'contact' })} className="hover:text-white transition-colors">Contact Us</button>
                 </div>
                 <div className="text-center">
@@ -569,7 +561,7 @@ const AuthorPage = ({ id }) => {
     );
 };
 
-const CartPage = () => {
+const CartPage = ({}) => {
     const { cart, updateCartQuantity, removeFromCart, setView } = useContext(AppContext);
     const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
@@ -690,8 +682,6 @@ const ContactPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // In a real app, you'd send this data to a server.
-        // For now, we'll just simulate a success message.
         showToast("Thank you for your message!");
         setFormData({ name: '', email: '', message: '' });
     };
@@ -713,23 +703,23 @@ const ContactPage = () => {
                             <div>
                                 <label htmlFor="name" className="block text-sm font-medium text-stone-700">Full name</label>
                                 <div className="mt-1">
-                                    <input type="text" name="name" id="name" required value={formData.name} onChange={handleChange} className="block w-full rounded-md border-stone-300 shadow-sm focus:border-red-800 focus:ring-red-800" />
+                                    <input type="text" name="name" id="name" required value={formData.name} onChange={handleChange} className="block w-full rounded-md border-stone-300 bg-stone-50 shadow-sm focus:border-red-800 focus:ring-red-800 focus:ring-1 transition-colors" />
                                 </div>
                             </div>
                             <div>
                                 <label htmlFor="email" className="block text-sm font-medium text-stone-700">Email</label>
                                 <div className="mt-1">
-                                    <input id="email" name="email" type="email" required value={formData.email} onChange={handleChange} className="block w-full rounded-md border-stone-300 shadow-sm focus:border-red-800 focus:ring-red-800" />
+                                    <input id="email" name="email" type="email" required value={formData.email} onChange={handleChange} className="block w-full rounded-md border-stone-300 bg-stone-50 shadow-sm focus:border-red-800 focus:ring-red-800 focus:ring-1 transition-colors" />
                                 </div>
                             </div>
                             <div>
                                 <label htmlFor="message" className="block text-sm font-medium text-stone-700">Message</label>
                                 <div className="mt-1">
-                                    <textarea id="message" name="message" rows={4} required value={formData.message} onChange={handleChange} className="block w-full rounded-md border-stone-300 shadow-sm focus:border-red-800 focus:ring-red-800"></textarea>
+                                    <textarea id="message" name="message" rows={4} required value={formData.message} onChange={handleChange} className="block w-full rounded-md border-stone-300 bg-stone-50 shadow-sm focus:border-red-800 focus:ring-red-800 focus:ring-1 transition-colors"></textarea>
                                 </div>
                             </div>
                             <div>
-                                <button type="submit" className="w-full flex justify-center items-center gap-2 rounded-md border border-transparent bg-red-800 py-3 px-6 text-base font-medium text-white shadow-sm hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-800 focus:ring-offset-2">
+                                <button type="submit" className="w-full flex justify-center items-center gap-2 rounded-md border border-transparent bg-red-800 py-3 px-6 text-base font-medium text-white shadow-sm hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-800 focus:ring-offset-2 transition-transform hover:scale-105">
                                     Send Message
                                     <PaperAirplaneIcon className="w-5 h-5" />
                                 </button>
@@ -787,7 +777,7 @@ const SearchResultsPage = ({ query }) => {
 
 const CheckoutPage = () => {
     const { cart, handlePurchase } = useContext(AppContext);
-    const [paymentMethod, setPaymentMethod] = useState('bkash');
+    const [paymentMethod, setPaymentMethod] = useState('card');
     const [isProcessing, setIsProcessing] = useState(false);
     const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
@@ -799,6 +789,13 @@ const CheckoutPage = () => {
             setIsProcessing(false);
         }, 2000);
     };
+
+    const paymentOptions = [
+        { id: 'card', icons: [<VisaIcon key="v"/>, <MastercardIcon key="m"/>, <AmexIcon key="a"/>], label: 'Credit/Debit Card' },
+        { id: 'bkash', icons: [<BkashIcon key="b"/>], label: 'bKash' },
+        { id: 'nagad', icons: [<NagadIcon key="n"/>], label: 'Nagad' },
+        { id: 'rocket', icons: [<RocketIcon key="r"/>], label: 'Rocket' }
+    ];
 
     return (
         <PageWrapper>
@@ -813,17 +810,17 @@ const CheckoutPage = () => {
                                     <label className="text-base font-medium text-stone-900">Payment Method</label>
                                     <fieldset className="mt-4">
                                         <legend className="sr-only">Payment type</legend>
-                                        <div className="space-y-4">
-                                            {['bkash', 'nagad', 'rocket'].map((method) => (
-                                                <div key={method} className="flex items-center">
-                                                    <input id={method} name="payment-type" type="radio" checked={paymentMethod === method} onChange={() => setPaymentMethod(method)} className="h-4 w-4 border-stone-300 text-red-800 focus:ring-red-800" />
-                                                    <label htmlFor={method} className="ml-3 flex items-center gap-3 text-sm font-medium text-stone-700">
-                                                        {method === 'bkash' && <BkashIcon />}
-                                                        {method === 'nagad' && <NagadIcon />}
-                                                        {method === 'rocket' && <RocketIcon />}
-                                                        <span className="capitalize">{method}</span>
-                                                    </label>
-                                                </div>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                            {paymentOptions.map(({ id, icons, label }) => (
+                                                <label key={id} htmlFor={id} className={`relative flex p-4 rounded-lg shadow-sm border cursor-pointer transition-all duration-200 ${paymentMethod === id ? 'bg-red-50 border-red-700' : 'bg-white border-stone-300 hover:bg-stone-50'}`}>
+                                                    <input id={id} name="payment-type" type="radio" checked={paymentMethod === id} onChange={() => setPaymentMethod(id)} className="h-4 w-4 border-stone-300 text-red-800 focus:ring-red-800" />
+                                                    <div className="ml-3 flex flex-col">
+                                                        <span className="text-sm font-medium text-stone-900">{label}</span>
+                                                        <div className="flex items-center gap-2 mt-1">
+                                                            {icons}
+                                                        </div>
+                                                    </div>
+                                                </label>
                                             ))}
                                         </div>
                                     </fieldset>
@@ -831,13 +828,32 @@ const CheckoutPage = () => {
                                 <form onSubmit={onPurchase} className="mt-6 space-y-6">
                                     <div>
                                         <label htmlFor="email" className="block text-sm font-medium text-stone-700">Email for Receipt</label>
-                                        <input type="email" id="email" name="email" required className="mt-1 block w-full rounded-md border-stone-300 shadow-sm focus:border-red-800 focus:ring-red-800" />
+                                        <input type="email" id="email" name="email" required className="mt-1 block w-full rounded-md border-stone-300 bg-stone-50 shadow-sm focus:border-red-800 focus:ring-red-800 focus:ring-1 transition-colors" />
                                     </div>
-                                    <div>
-                                        <label htmlFor="mobile-number" className="block text-sm font-medium text-stone-700">{paymentMethod.charAt(0).toUpperCase() + paymentMethod.slice(1)} Account Number</label>
-                                        <input type="tel" id="mobile-number" name="mobile-number" placeholder="e.g., 01xxxxxxxxx" required className="mt-1 block w-full rounded-md border-stone-300 shadow-sm focus:border-red-800 focus:ring-red-800" />
-                                    </div>
-                                    <button type="submit" disabled={isProcessing} className="w-full flex justify-center items-center gap-2 rounded-md border border-transparent bg-red-800 py-3 px-6 text-base font-medium text-white shadow-sm hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-800 focus:ring-offset-2 disabled:bg-stone-400">
+                                    
+                                    {paymentMethod === 'card' ? (
+                                        <>
+                                            <div>
+                                                <label htmlFor="card-details" className="block text-sm font-medium text-stone-700">Card Details</label>
+                                                <input type="text" id="card-details" name="card-details" placeholder="Card number" required className="mt-1 block w-full rounded-md border-stone-300 bg-stone-50 shadow-sm focus:border-red-800 focus:ring-red-800 focus:ring-1 transition-colors" />
+                                                <div className="flex gap-4 mt-4">
+                                                    <input type="text" placeholder="MM / YY" required className="block w-full rounded-md border-stone-300 bg-stone-50 shadow-sm focus:border-red-800 focus:ring-red-800 focus:ring-1 transition-colors" />
+                                                    <input type="text" placeholder="CVC" required className="block w-full rounded-md border-stone-300 bg-stone-50 shadow-sm focus:border-red-800 focus:ring-red-800 focus:ring-1 transition-colors" />
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <label htmlFor="name-on-card" className="block text-sm font-medium text-stone-700">Name on card</label>
+                                                <input type="text" id="name-on-card" name="name-on-card" required className="mt-1 block w-full rounded-md border-stone-300 bg-stone-50 shadow-sm focus:border-red-800 focus:ring-red-800 focus:ring-1 transition-colors" />
+                                            </div>
+                                        </>
+                                    ) : (
+                                        <div>
+                                            <label htmlFor="mobile-number" className="block text-sm font-medium text-stone-700">{paymentMethod.charAt(0).toUpperCase() + paymentMethod.slice(1)} Account Number</label>
+                                            <input type="tel" id="mobile-number" name="mobile-number" placeholder="e.g., 01xxxxxxxxx" required className="mt-1 block w-full rounded-md border-stone-300 bg-stone-50 shadow-sm focus:border-red-800 focus:ring-red-800 focus:ring-1 transition-colors" />
+                                        </div>
+                                    )}
+
+                                    <button type="submit" disabled={isProcessing} className="w-full flex justify-center items-center gap-2 rounded-md border border-transparent bg-red-800 py-3 px-6 text-base font-medium text-white shadow-sm hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-800 focus:ring-offset-2 disabled:bg-stone-400 transition-transform hover:scale-105">
                                         {isProcessing ? 'Processing...' : `Pay $${subtotal.toFixed(2)}`}
                                     </button>
                                 </form>
@@ -883,7 +899,7 @@ const OrderConfirmationPage = () => {
                     <div className="max-w-2xl mx-auto text-center bg-white p-10 rounded-lg shadow-xl border border-stone-200">
                         <CheckCircleIcon className="w-16 h-16 text-green-500 mx-auto" />
                         <h1 className="mt-6 text-4xl font-serif font-bold tracking-tight text-stone-900">Thank You!</h1>
-                        <p className="mt-4 text-lg text-stone-600">Your order has been confirmed. You can download your books below or find them anytime in "My Library".</p>
+                        <p className="mt-4 text-lg text-stone-600">Your order has been confirmed. You can download your books below.</p>
                         
                         <div className="mt-8 text-left">
                              <h2 className="text-xl font-serif font-semibold text-stone-800">Your Downloads</h2>
@@ -904,10 +920,10 @@ const OrderConfirmationPage = () => {
                         </div>
 
                         <button 
-                            onClick={() => setView({ page: 'my-library' })}
+                            onClick={() => setView({ page: 'all-products' })}
                             className="mt-8 w-full rounded-md bg-red-800 px-6 py-3 text-base font-semibold text-white shadow-lg hover:bg-red-700"
                         >
-                            Go to My Library
+                            Continue Shopping
                         </button>
                     </div>
                 </div>
@@ -915,42 +931,6 @@ const OrderConfirmationPage = () => {
         </PageWrapper>
     );
 };
-
-const MyLibraryPage = () => {
-    const { purchasedBooks, setView } = useContext(AppContext);
-    
-    return (
-        <PageWrapper>
-            <div className="bg-amber-50/50">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 min-h-[60vh]">
-                    <div className="border-b-2 border-stone-300 pb-6 mb-10">
-                        <h1 className="text-4xl font-serif font-bold tracking-tight text-stone-900">My Library</h1>
-                        <p className="mt-4 text-base text-stone-600">All of your purchased books in one place.</p>
-                    </div>
-
-                    {purchasedBooks.length === 0 ? (
-                         <div className="text-center py-12">
-                            <p className="text-stone-600 text-lg">You haven't purchased any books yet.</p>
-                            <button 
-                                onClick={() => setView({ page: 'all-products'})}
-                                className="mt-4 rounded-md bg-red-800 px-6 py-3 text-base font-semibold text-white shadow-lg hover:bg-red-700"
-                            >
-                                Start Shopping
-                            </button>
-                        </div>
-                    ) : (
-                        <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                            {purchasedBooks.map((book) => (
-                                <BookCard key={book.id} book={book} />
-                            ))}
-                        </div>
-                    )}
-                </div>
-            </div>
-        </PageWrapper>
-    );
-};
-
 
 const NotFoundPage = () => {
     const { setView } = useContext(AppContext);
@@ -1012,7 +992,6 @@ export default function App() {
   const [view, setView] = useState({ page: 'home', id: null, query: '' });
   const [cart, setCart] = useState([]);
   const [wishlist, setWishlist] = useState([]);
-  const [purchasedBooks, setPurchasedBooks] = useState([]);
   const [lastOrder, setLastOrder] = useState([]);
   const [toast, setToast] = useState({ show: false, message: '' });
 
@@ -1085,12 +1064,6 @@ export default function App() {
 
   // Purchase Management
   const handlePurchase = () => {
-      const newPurchases = cart.map(item => books.find(b => b.id === item.id));
-      setPurchasedBooks(prev => {
-          const existingIds = new Set(prev.map(b => b.id));
-          const uniqueNewPurchases = newPurchases.filter(b => !existingIds.has(b.id));
-          return [...prev, ...uniqueNewPurchases];
-      });
       setLastOrder(cart);
       setCart([]);
       setView({ page: 'order-confirmation' });
@@ -1115,14 +1088,13 @@ export default function App() {
       case 'search-results': return <SearchResultsPage query={view.query} />;
       case 'checkout': return <CheckoutPage />;
       case 'order-confirmation': return <OrderConfirmationPage />;
-      case 'my-library': return <MyLibraryPage />;
       default: return <NotFoundPage />;
     }
   };
 
   useEffect(() => { window.scrollTo(0, 0); }, [view]);
 
-  const contextValue = { view, setView, cart, addToCart, updateCartQuantity, removeFromCart, wishlist, toggleWishlist, showToast, purchasedBooks, handlePurchase, lastOrder, handleBuyNow };
+  const contextValue = { view, setView, cart, addToCart, updateCartQuantity, removeFromCart, wishlist, toggleWishlist, showToast, handlePurchase, lastOrder, handleBuyNow };
 
   return (
     <AppContext.Provider value={contextValue}>
@@ -1148,4 +1120,3 @@ export default function App() {
     </AppContext.Provider>
   );
 }
-
