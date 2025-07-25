@@ -1,48 +1,66 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
 
-// --- ICONS (Heroicons) ---
+// --- ICONS (Heroicons & Custom) ---
 // Using inline SVGs for icons to avoid external dependencies.
 const BookOpenIcon = ({ className = 'w-6 h-6' }) => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
   </svg>
 );
-
 const ShoppingCartIcon = ({ className = 'w-6 h-6' }) => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c.51 0 .962-.344 1.087-.835l1.823-6.84a1.125 1.125 0 00-.986-1.43H5.625M7.5 14.25v-6h11.218" />
   </svg>
 );
-
 const StarIcon = ({ className = 'w-5 h-5', isFilled = true }) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill={isFilled ? "currentColor" : "none"} stroke="currentColor" strokeWidth={isFilled ? 0 : 1.5} className={className}>
     <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
   </svg>
 );
-
 const XMarkIcon = ({ className = 'w-6 h-6' }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
     </svg>
 );
-
 const HeartIcon = ({ className = 'w-6 h-6', isFilled = false }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill={isFilled ? 'currentColor' : 'none'} viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
     </svg>
 );
-
 const MenuIcon = ({ className = 'w-6 h-6' }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
     </svg>
 );
-
 const ArrowUpIcon = ({ className = 'w-6 h-6' }) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
     </svg>
 );
+const SearchIcon = ({ className = 'w-6 h-6' }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+    </svg>
+);
+const PaperAirplaneIcon = ({ className = 'w-6 h-6' }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+    </svg>
+);
+const CheckCircleIcon = ({ className = 'w-6 h-6' }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+);
+const ArrowDownTrayIcon = ({ className = 'w-6 h-6' }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+    </svg>
+);
+// Custom Payment Method SVGs
+const BkashIcon = () => <svg width="40" height="40" viewBox="0 0 40 40"><path fill="#D82A7D" d="M15.38 3.8h11.16l-3.5 11.2h-4.16zM27.22 3.8h11.16l-7.66 22.12h-7.62zM1.62 3.8h11.16L5.12 25.92H1.62zM15.98 15.6h11.16l-3.5 10.32h-4.16z"></path></svg>;
+const NagadIcon = () => <svg width="40" height="40" viewBox="0 0 40 40"><path fill="#F54D4D" d="M20 0C9 0 0 9 0 20s9 20 20 20 20-9 20-20S31 0 20 0zm4.5 24.8l-8.3 4.2c-.4.2-.8 0-1-.4l-4.2-8.3c-.2-.4 0-.8.4-1l8.3-4.2c.4-.2.8 0 1 .4l4.2 8.3c.2.4 0 .8-.4 1z"></path></svg>;
+const RocketIcon = () => <svg width="40" height="40" viewBox="0 0 40 40"><path fill="#8A2BE2" d="M20 0L0 10l20 30L40 10zM20 15l10 5-10 15-10-15z"></path></svg>;
 
 
 // --- MOCK DATA ---
@@ -51,10 +69,10 @@ const authors = {
   'author-2': { id: 'author-2', name: 'Marcus Thorne', bio: 'Marcus Thorne is a master of the science fiction genre. His world-building is second to none, creating sprawling universes that challenge the imagination. Thorne holds a degree in astrophysics, which lends a hard science edge to his stories.', imageUrl: 'https://placehold.co/400x400/a3a3a3/ffffff?text=Marcus', books: ['book-2', 'book-3'] },
 };
 const books = [
-  { id: 'book-1', title: 'The Last Echo', authorId: 'author-1', coverImageUrl: 'https://placehold.co/600x800/52525b/ffffff?text=The+Last+Echo', price: 14.99, description: 'A gripping tale of memory and loss, where a reclusive archivist discovers a sound recording that could change history. But as she delves deeper, she finds that some secrets are meant to stay buried.', genre: 'Fiction', publicationDate: '2023-05-15', avgRating: 4.5, sampleText: "The dust motes danced in the single beam of light that pierced the gloom of the archive. Eleanor ran a gloved finger across a canister labeled 'Echo-7'. She hadn't come here looking for trouble, but the low, melancholic hum emanating from within the metal suggested trouble had been waiting for her all along..." },
-  { id: 'book-2', title: 'Starlight Imperium', authorId: 'author-2', coverImageUrl: 'https://placehold.co/600x800/1e293b/ffffff?text=Starlight+Imperium', price: 18.99, description: 'The galaxy is on the brink of war. A lone pilot, framed for an act of interstellar terrorism, must clear her name and unite a fractured alliance before the tyrannical Imperium extinguishes the last flames of freedom.', genre: 'Sci-Fi', publicationDate: '2022-11-01', avgRating: 4.8, sampleText: "Captain Eva Rostova watched the nebula bloom on the main viewer, a cosmic flower of violent purples and reds. 'They're coming,' she whispered, her knuckles white on the command chair. 'And they're bringing hell with them.' The ship shuddered as the first volley of plasma fire impacted the shields." },
-  { id: 'book-3', title: 'Chronoscape', authorId: 'author-2', coverImageUrl: 'https://placehold.co/600x800/7c2d12/ffffff?text=Chronoscape', price: 16.99, description: 'A historian invents a device to view the past, but soon learns that observation is not without consequence. Every glance backward creates ripples that threaten to unravel the fabric of his own present.', genre: 'Sci-Fi', publicationDate: '2024-01-20', avgRating: 4.6, sampleText: 'Dr. Aris Thorne activated the Chronoscape. The cobbled streets of ancient Rome flickered into existence around him, a ghostly overlay on his sterile lab. He was merely an observer, a ghost in the machine of time. Or so he thought. Then, a Roman centurion looked directly at him, a flicker of recognition in his eyes, and Aris felt a cold dread he had never known.' },
-  { id: 'book-4', title: 'The Willow Creek Letters', authorId: 'author-1', coverImageUrl: 'https://placehold.co/600x800/166534/ffffff?text=Willow+Creek', price: 12.99, description: 'Two strangers, a generation apart, begin an anonymous correspondence, sharing their deepest secrets and dreams. A heartwarming story about friendship, second chances, and the timeless power of the written word.', genre: 'Fiction', publicationDate: '2021-08-30', avgRating: 4.9, sampleText: "It started with a note, tucked into the spine of a library book. 'To whoever finds this,' it read, 'I hope you are having a better day than I am.' Liam, recently retired and adrift, found himself writing back. He placed his reply in the same book, hoping a stranger's words might anchor him." },
+  { id: 'book-1', title: 'The Last Echo', authorId: 'author-1', coverImageUrl: 'https://placehold.co/600x800/52525b/ffffff?text=The+Last+Echo', price: 14.99, description: 'A gripping tale of memory and loss, where a reclusive archivist discovers a sound recording that could change history. But as she delves deeper, she finds that some secrets are meant to stay buried.', genre: 'Fiction', publicationDate: '2023-05-15', avgRating: 4.5, sampleText: "The dust motes danced in the single beam of light that pierced the gloom of the archive. Eleanor ran a gloved finger across a canister labeled 'Echo-7'. She hadn't come here looking for trouble, but the low, melancholic hum emanating from within the metal suggested trouble had been waiting for her all along...", downloadUrl: '#' },
+  { id: 'book-2', title: 'Starlight Imperium', authorId: 'author-2', coverImageUrl: 'https://placehold.co/600x800/1e293b/ffffff?text=Starlight+Imperium', price: 18.99, description: 'The galaxy is on the brink of war. A lone pilot, framed for an act of interstellar terrorism, must clear her name and unite a fractured alliance before the tyrannical Imperium extinguishes the last flames of freedom.', genre: 'Sci-Fi', publicationDate: '2022-11-01', avgRating: 4.8, sampleText: "Captain Eva Rostova watched the nebula bloom on the main viewer, a cosmic flower of violent purples and reds. 'They're coming,' she whispered, her knuckles white on the command chair. 'And they're bringing hell with them.' The ship shuddered as the first volley of plasma fire impacted the shields.", downloadUrl: '#' },
+  { id: 'book-3', title: 'Chronoscape', authorId: 'author-2', coverImageUrl: 'https://placehold.co/600x800/7c2d12/ffffff?text=Chronoscape', price: 16.99, description: 'A historian invents a device to view the past, but soon learns that observation is not without consequence. Every glance backward creates ripples that threaten to unravel the fabric of his own present.', genre: 'Sci-Fi', publicationDate: '2024-01-20', avgRating: 4.6, sampleText: 'Dr. Aris Thorne activated the Chronoscape. The cobbled streets of ancient Rome flickered into existence around him, a ghostly overlay on his sterile lab. He was merely an observer, a ghost in the machine of time. Or so he thought. Then, a Roman centurion looked directly at him, a flicker of recognition in his eyes, and Aris felt a cold dread he had never known.', downloadUrl: '#' },
+  { id: 'book-4', title: 'The Willow Creek Letters', authorId: 'author-1', coverImageUrl: 'https://placehold.co/600x800/166534/ffffff?text=Willow+Creek', price: 12.99, description: 'Two strangers, a generation apart, begin an anonymous correspondence, sharing their deepest secrets and dreams. A heartwarming story about friendship, second chances, and the timeless power of the written word.', genre: 'Fiction', publicationDate: '2021-08-30', avgRating: 4.9, sampleText: "It started with a note, tucked into the spine of a library book. 'To whoever finds this,' it read, 'I hope you are having a better day than I am.' Liam, recently retired and adrift, found himself writing back. He placed his reply in the same book, hoping a stranger's words might anchor him.", downloadUrl: '#' },
 ];
 const reviews = {
   'book-1': [{ id: 'rev-1', userName: 'Reader_27', rating: 5, comment: 'Absolutely unputdownable! The mystery kept me guessing until the very end.' }, { id: 'rev-2', userName: 'Bookworm_Belle', rating: 4, comment: 'A beautifully written, atmospheric novel. A bit slow at times, but the payoff is worth it.' }],
@@ -85,7 +103,10 @@ const BookCard = ({ book }) => {
   const isInWishlist = wishlist.includes(book.id);
 
   return (
-    <div className="group relative flex flex-col bg-white p-4 rounded-md shadow-md border border-stone-200 hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1">
+    <div 
+        onClick={() => setView({ page: 'product', id: book.id })}
+        className="group relative flex flex-col bg-white p-4 rounded-md shadow-md border border-stone-200 hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 cursor-pointer"
+    >
       <div className="overflow-hidden rounded-md bg-stone-200">
         <img 
           src={book.coverImageUrl} 
@@ -107,8 +128,11 @@ const BookCard = ({ book }) => {
       <div className="mt-4 flex flex-col flex-grow">
         <h3 className="text-lg font-serif font-semibold text-stone-800">{book.title}</h3>
         <p 
-            className="text-sm text-stone-500 cursor-pointer hover:text-red-800"
-            onClick={() => setView({ page: 'author', id: author.id })}
+            className="text-sm text-stone-500 hover:text-red-800"
+            onClick={(e) => {
+                e.stopPropagation(); // Prevent card click when clicking author
+                setView({ page: 'author', id: author.id });
+            }}
         >
             {author.name}
         </p>
@@ -118,12 +142,6 @@ const BookCard = ({ book }) => {
         </div>
         <p className="mt-2 text-xl font-sans font-bold text-stone-900">${book.price}</p>
       </div>
-      <button 
-        onClick={() => setView({ page: 'product', id: book.id })}
-        className="mt-4 w-full rounded-md bg-stone-700 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-stone-800 focus:outline-none focus:ring-2 focus:ring-red-800 focus:ring-offset-2 transition-colors"
-      >
-        View Details
-      </button>
     </div>
   );
 };
@@ -131,6 +149,7 @@ const BookCard = ({ book }) => {
 const Header = () => {
     const { setView, cart, wishlist } = useContext(AppContext);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
     const cartItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
     const wishlistItemCount = wishlist.length;
 
@@ -139,39 +158,62 @@ const Header = () => {
         setIsMenuOpen(false);
     }
 
+    const handleSearchSubmit = (e) => {
+        e.preventDefault();
+        if (searchQuery.trim()) {
+            handleLinkClick({ page: 'search-results', query: searchQuery.trim() });
+            setSearchQuery('');
+        }
+    }
+
     return (
         <>
             <header className="bg-stone-800 shadow-lg sticky top-0 z-40 text-white">
                 <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex h-20 items-center justify-between">
+                    <div className="flex h-20 items-center justify-between gap-4">
                         <div className="flex items-center">
                             <button onClick={() => handleLinkClick({ page: 'home' })} className="flex-shrink-0 flex items-center gap-3">
                                 <BookOpenIcon className="h-8 w-8 text-amber-300" />
                                 <span className="text-3xl font-serif text-white">ShikhunBD</span>
                             </button>
                         </div>
-                        <div className="hidden md:flex md:items-center md:space-x-8">
-                            <button onClick={() => handleLinkClick({ page: 'home' })} className="font-sans text-stone-300 hover:text-white transition-colors">Home</button>
-                            <button onClick={() => handleLinkClick({ page: 'all-products' })} className="font-sans text-stone-300 hover:text-white transition-colors">All Books</button>
-                            <button onClick={() => handleLinkClick({ page: 'wishlist' })} className="font-sans text-stone-300 hover:text-white transition-colors">Wishlist</button>
+                        
+                        {/* Desktop Search Bar */}
+                        <div className="hidden md:flex flex-1 max-w-xl">
+                            <form onSubmit={handleSearchSubmit} className="w-full flex">
+                                <input 
+                                    type="text"
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    placeholder="Search for books or authors..."
+                                    className="w-full py-2 px-4 rounded-l-md border-0 text-stone-900 focus:ring-2 focus:ring-inset focus:ring-amber-400"
+                                />
+                                <button type="submit" className="bg-amber-400 hover:bg-amber-500 text-stone-900 font-bold py-2 px-4 rounded-r-md transition-colors">
+                                    <SearchIcon className="h-6 w-6"/>
+                                </button>
+                            </form>
                         </div>
+
                         <div className="flex items-center gap-2">
-                             <button onClick={() => handleLinkClick({ page: 'wishlist' })} className="relative p-2 text-stone-300 hover:text-white transition-colors">
-                                <HeartIcon className="h-7 w-7" />
-                                {wishlistItemCount > 0 && (
-                                    <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-red-700 text-xs font-medium text-white">
-                                        {wishlistItemCount}
-                                    </span>
-                                )}
-                            </button>
-                            <button onClick={() => handleLinkClick({ page: 'cart' })} className="relative p-2 text-stone-300 hover:text-white transition-colors">
-                                <ShoppingCartIcon className="h-7 w-7" />
-                                {cartItemCount > 0 && (
-                                    <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-red-700 text-xs font-medium text-white">
-                                        {cartItemCount}
-                                    </span>
-                                )}
-                            </button>
+                             <div className="hidden md:flex items-center gap-4">
+                                <button onClick={() => handleLinkClick({ page: 'my-library' })} className="font-sans text-stone-300 hover:text-white transition-colors">My Library</button>
+                                <button onClick={() => handleLinkClick({ page: 'wishlist' })} className="relative p-2 text-stone-300 hover:text-white transition-colors">
+                                    <HeartIcon className="h-7 w-7" />
+                                    {wishlistItemCount > 0 && (
+                                        <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-red-700 text-xs font-medium text-white">
+                                            {wishlistItemCount}
+                                        </span>
+                                    )}
+                                </button>
+                                <button onClick={() => handleLinkClick({ page: 'cart' })} className="relative p-2 text-stone-300 hover:text-white transition-colors">
+                                    <ShoppingCartIcon className="h-7 w-7" />
+                                    {cartItemCount > 0 && (
+                                        <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-red-700 text-xs font-medium text-white">
+                                            {cartItemCount}
+                                        </span>
+                                    )}
+                                </button>
+                            </div>
                             <div className="md:hidden">
                                 <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2 text-stone-300 hover:text-white">
                                     {isMenuOpen ? <XMarkIcon className="h-7 w-7" /> : <MenuIcon className="h-7 w-7" />}
@@ -183,26 +225,59 @@ const Header = () => {
             </header>
             {/* Mobile Menu */}
             <div className={`fixed top-20 left-0 right-0 bottom-0 bg-stone-800/95 backdrop-blur-sm z-30 transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'} md:hidden`}>
-                <div className="flex flex-col items-center justify-center h-full gap-8">
+                <div className="flex flex-col items-center justify-center h-full gap-8 p-8">
+                     <form onSubmit={handleSearchSubmit} className="w-full max-w-sm flex">
+                        <input 
+                            type="text"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            placeholder="Search for books..."
+                            className="w-full py-3 px-4 rounded-l-md border-0 text-stone-900 focus:ring-2 focus:ring-inset focus:ring-amber-400"
+                        />
+                        <button type="submit" className="bg-amber-400 hover:bg-amber-500 text-stone-900 font-bold py-3 px-4 rounded-r-md transition-colors">
+                            <SearchIcon className="h-6 w-6"/>
+                        </button>
+                    </form>
                     <button onClick={() => handleLinkClick({ page: 'home' })} className="font-serif text-3xl text-white hover:text-amber-300">Home</button>
                     <button onClick={() => handleLinkClick({ page: 'all-products' })} className="font-serif text-3xl text-white hover:text-amber-300">All Books</button>
+                    <button onClick={() => handleLinkClick({ page: 'my-library' })} className="font-serif text-3xl text-white hover:text-amber-300">My Library</button>
                     <button onClick={() => handleLinkClick({ page: 'wishlist' })} className="font-serif text-3xl text-white hover:text-amber-300">Wishlist</button>
+                    <button onClick={() => handleLinkClick({ page: 'contact' })} className="font-serif text-3xl text-white hover:text-amber-300">Contact</button>
+                    <div className="flex gap-8 mt-4">
+                        <button onClick={() => handleLinkClick({ page: 'wishlist' })} className="relative p-2 text-white">
+                            <HeartIcon className="h-8 w-8" />
+                            {wishlistItemCount > 0 && <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-red-700 text-xs font-medium">{wishlistItemCount}</span>}
+                        </button>
+                        <button onClick={() => handleLinkClick({ page: 'cart' })} className="relative p-2 text-white">
+                            <ShoppingCartIcon className="h-8 w-8" />
+                            {cartItemCount > 0 && <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-red-700 text-xs font-medium">{cartItemCount}</span>}
+                        </button>
+                    </div>
                 </div>
             </div>
         </>
     );
 };
 
-const Footer = () => (
-    <footer className="bg-stone-800 text-stone-300 border-t-4 border-stone-900">
-        <div className="container mx-auto py-12 px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-                <p className="font-serif text-lg">ShikhunBD</p>
-                <p className="mt-4 text-center text-sm text-stone-400">&copy; 2025 ShikhunBD. All rights reserved. A haven for readers.</p>
+const Footer = () => {
+    const { setView } = useContext(AppContext);
+    return (
+        <footer className="bg-stone-800 text-stone-300 border-t-4 border-stone-900">
+            <div className="container mx-auto py-12 px-4 sm:px-6 lg:px-8">
+                 <div className="flex justify-center space-x-8 mb-8">
+                    <button onClick={() => setView({ page: 'home' })} className="hover:text-white transition-colors">Home</button>
+                    <button onClick={() => setView({ page: 'all-products' })} className="hover:text-white transition-colors">All Books</button>
+                    <button onClick={() => setView({ page: 'my-library' })} className="hover:text-white transition-colors">My Library</button>
+                    <button onClick={() => setView({ page: 'contact' })} className="hover:text-white transition-colors">Contact Us</button>
+                </div>
+                <div className="text-center">
+                    <p className="font-serif text-lg">ShikhunBD</p>
+                    <p className="mt-4 text-center text-sm text-stone-400">&copy; 2025 ShikhunBD. All rights reserved. A haven for readers.</p>
+                </div>
             </div>
-        </div>
-    </footer>
-);
+        </footer>
+    );
+};
 
 const SampleModal = ({ book, onClose }) => {
     useEffect(() => {
@@ -344,7 +419,7 @@ const ProductListPage = () => {
 };
 
 const ProductDetailPage = ({ id }) => {
-    const { setView, addToCart, wishlist, toggleWishlist } = useContext(AppContext);
+    const { setView, addToCart, handleBuyNow, wishlist, toggleWishlist } = useContext(AppContext);
     const [showSample, setShowSample] = useState(false);
     const book = books.find(b => b.id === id);
     if (!book) return <NotFoundPage />;
@@ -394,22 +469,31 @@ const ProductDetailPage = ({ id }) => {
                                     <p>{book.description}</p>
                                 </div>
                             </div>
-                            <div className="mt-10 flex gap-x-4">
+                            <div className="mt-10 flex flex-col gap-y-4">
                                 <button
                                     type="button"
-                                    onClick={() => addToCart(book.id, 1)}
-                                    className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-red-800 py-3 px-8 text-base font-medium text-white shadow-md hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-800 focus:ring-offset-2 transition-colors"
+                                    onClick={() => handleBuyNow(book.id)}
+                                    className="w-full flex items-center justify-center rounded-md border border-transparent bg-amber-500 py-3 px-8 text-base font-medium text-stone-900 shadow-md hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 transition-colors"
                                 >
-                                    Add to Cart
+                                    Buy Now
                                 </button>
-                                <button
-                                    type="button"
-                                    onClick={() => toggleWishlist(book.id)}
-                                    className="p-3 flex items-center justify-center rounded-md text-red-700 bg-red-50 hover:bg-red-100 border border-red-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-800 transition-colors"
-                                    aria-label="Toggle Wishlist"
-                                >
-                                    <HeartIcon isFilled={isInWishlist} className="w-6 h-6" />
-                                </button>
+                                <div className="flex gap-x-4">
+                                    <button
+                                        type="button"
+                                        onClick={() => addToCart(book.id, 1)}
+                                        className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-red-800 py-3 px-8 text-base font-medium text-white shadow-md hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-800 focus:ring-offset-2 transition-colors"
+                                    >
+                                        Add to Cart
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => toggleWishlist(book.id)}
+                                        className="p-3 flex items-center justify-center rounded-md text-red-700 bg-red-50 hover:bg-red-100 border border-red-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-800 transition-colors"
+                                        aria-label="Toggle Wishlist"
+                                    >
+                                        <HeartIcon isFilled={isInWishlist} className="w-6 h-6" />
+                                    </button>
+                                </div>
                             </div>
                              <div className="mt-4">
                                 <button
@@ -547,7 +631,11 @@ const CartPage = () => {
                                 </div>
                             </dl>
                             <div className="mt-6">
-                                <button disabled={cart.length === 0} className="w-full rounded-md border border-transparent bg-red-800 py-3 px-4 text-base font-medium text-white shadow-sm hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-800 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-stone-400">
+                                <button 
+                                    onClick={() => setView({ page: 'checkout' })}
+                                    disabled={cart.length === 0} 
+                                    className="w-full rounded-md border border-transparent bg-red-800 py-3 px-4 text-base font-medium text-white shadow-sm hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-800 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-stone-400"
+                                >
                                     Proceed to Checkout
                                 </button>
                             </div>
@@ -595,6 +683,274 @@ const WishlistPage = () => {
         </PageWrapper>
     );
 };
+
+const ContactPage = () => {
+    const { showToast } = useContext(AppContext);
+    const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // In a real app, you'd send this data to a server.
+        // For now, we'll just simulate a success message.
+        showToast("Thank you for your message!");
+        setFormData({ name: '', email: '', message: '' });
+    };
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    return (
+        <PageWrapper>
+            <div className="bg-amber-50/50">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                    <div className="max-w-2xl mx-auto text-center">
+                        <h1 className="text-4xl font-serif font-bold tracking-tight text-stone-900">Contact Us</h1>
+                        <p className="mt-4 text-lg text-stone-600">Have a question or feedback? We'd love to hear from you.</p>
+                    </div>
+                    <form onSubmit={handleSubmit} className="mt-12 max-w-xl mx-auto bg-white p-8 rounded-lg shadow-md border border-stone-200">
+                        <div className="grid grid-cols-1 gap-y-6">
+                            <div>
+                                <label htmlFor="name" className="block text-sm font-medium text-stone-700">Full name</label>
+                                <div className="mt-1">
+                                    <input type="text" name="name" id="name" required value={formData.name} onChange={handleChange} className="block w-full rounded-md border-stone-300 shadow-sm focus:border-red-800 focus:ring-red-800" />
+                                </div>
+                            </div>
+                            <div>
+                                <label htmlFor="email" className="block text-sm font-medium text-stone-700">Email</label>
+                                <div className="mt-1">
+                                    <input id="email" name="email" type="email" required value={formData.email} onChange={handleChange} className="block w-full rounded-md border-stone-300 shadow-sm focus:border-red-800 focus:ring-red-800" />
+                                </div>
+                            </div>
+                            <div>
+                                <label htmlFor="message" className="block text-sm font-medium text-stone-700">Message</label>
+                                <div className="mt-1">
+                                    <textarea id="message" name="message" rows={4} required value={formData.message} onChange={handleChange} className="block w-full rounded-md border-stone-300 shadow-sm focus:border-red-800 focus:ring-red-800"></textarea>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="submit" className="w-full flex justify-center items-center gap-2 rounded-md border border-transparent bg-red-800 py-3 px-6 text-base font-medium text-white shadow-sm hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-800 focus:ring-offset-2">
+                                    Send Message
+                                    <PaperAirplaneIcon className="w-5 h-5" />
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </PageWrapper>
+    );
+};
+
+const SearchResultsPage = ({ query }) => {
+    const { setView } = useContext(AppContext);
+    const lowerCaseQuery = query.toLowerCase();
+    const results = books.filter(book => 
+        book.title.toLowerCase().includes(lowerCaseQuery) || 
+        authors[book.authorId].name.toLowerCase().includes(lowerCaseQuery)
+    );
+
+    return (
+        <PageWrapper>
+            <div className="bg-amber-50/50">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 min-h-[60vh]">
+                    <div className="border-b-2 border-stone-300 pb-6 mb-10">
+                        <h1 className="text-4xl font-serif font-bold tracking-tight text-stone-900">Search Results</h1>
+                        <p className="mt-4 text-base text-stone-600">
+                            {results.length} {results.length === 1 ? 'result' : 'results'} found for "<span className="font-semibold">{query}</span>"
+                        </p>
+                    </div>
+
+                    {results.length === 0 ? (
+                         <div className="text-center py-12">
+                            <p className="text-stone-600 text-lg">No books matched your search.</p>
+                            <p className="text-stone-500 mt-2">Try a different search term or browse our full collection.</p>
+                            <button 
+                                onClick={() => setView({ page: 'all-products'})}
+                                className="mt-4 rounded-md bg-red-800 px-6 py-3 text-base font-semibold text-white shadow-lg hover:bg-red-700"
+                            >
+                                Browse All Books
+                            </button>
+                        </div>
+                    ) : (
+                        <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                            {results.map((book) => (
+                                <BookCard key={book.id} book={book} />
+                            ))}
+                        </div>
+                    )}
+                </div>
+            </div>
+        </PageWrapper>
+    );
+};
+
+const CheckoutPage = () => {
+    const { cart, handlePurchase } = useContext(AppContext);
+    const [paymentMethod, setPaymentMethod] = useState('bkash');
+    const [isProcessing, setIsProcessing] = useState(false);
+    const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+    const onPurchase = (e) => {
+        e.preventDefault();
+        setIsProcessing(true);
+        setTimeout(() => {
+            handlePurchase();
+            setIsProcessing(false);
+        }, 2000);
+    };
+
+    return (
+        <PageWrapper>
+            <div className="bg-amber-50/50">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                    <div className="max-w-4xl mx-auto">
+                        <h1 className="text-4xl font-serif font-bold tracking-tight text-stone-900 text-center">Checkout</h1>
+                        <div className="mt-12 lg:grid lg:grid-cols-2 lg:gap-x-12">
+                            <div className="bg-white p-8 rounded-lg shadow-md border border-stone-200">
+                                <h2 className="text-2xl font-serif font-semibold text-stone-800">Payment Details</h2>
+                                <div className="mt-6">
+                                    <label className="text-base font-medium text-stone-900">Payment Method</label>
+                                    <fieldset className="mt-4">
+                                        <legend className="sr-only">Payment type</legend>
+                                        <div className="space-y-4">
+                                            {['bkash', 'nagad', 'rocket'].map((method) => (
+                                                <div key={method} className="flex items-center">
+                                                    <input id={method} name="payment-type" type="radio" checked={paymentMethod === method} onChange={() => setPaymentMethod(method)} className="h-4 w-4 border-stone-300 text-red-800 focus:ring-red-800" />
+                                                    <label htmlFor={method} className="ml-3 flex items-center gap-3 text-sm font-medium text-stone-700">
+                                                        {method === 'bkash' && <BkashIcon />}
+                                                        {method === 'nagad' && <NagadIcon />}
+                                                        {method === 'rocket' && <RocketIcon />}
+                                                        <span className="capitalize">{method}</span>
+                                                    </label>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <form onSubmit={onPurchase} className="mt-6 space-y-6">
+                                    <div>
+                                        <label htmlFor="email" className="block text-sm font-medium text-stone-700">Email for Receipt</label>
+                                        <input type="email" id="email" name="email" required className="mt-1 block w-full rounded-md border-stone-300 shadow-sm focus:border-red-800 focus:ring-red-800" />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="mobile-number" className="block text-sm font-medium text-stone-700">{paymentMethod.charAt(0).toUpperCase() + paymentMethod.slice(1)} Account Number</label>
+                                        <input type="tel" id="mobile-number" name="mobile-number" placeholder="e.g., 01xxxxxxxxx" required className="mt-1 block w-full rounded-md border-stone-300 shadow-sm focus:border-red-800 focus:ring-red-800" />
+                                    </div>
+                                    <button type="submit" disabled={isProcessing} className="w-full flex justify-center items-center gap-2 rounded-md border border-transparent bg-red-800 py-3 px-6 text-base font-medium text-white shadow-sm hover:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-800 focus:ring-offset-2 disabled:bg-stone-400">
+                                        {isProcessing ? 'Processing...' : `Pay $${subtotal.toFixed(2)}`}
+                                    </button>
+                                </form>
+                            </div>
+                            <div className="mt-10 lg:mt-0">
+                                <h2 className="text-2xl font-serif font-semibold text-stone-800">Order Summary</h2>
+                                <div className="mt-4 bg-white p-6 rounded-lg shadow-md border border-stone-200">
+                                    <ul className="divide-y divide-stone-200">
+                                        {cart.map(item => (
+                                            <li key={item.id} className="flex items-center py-4">
+                                                <img src={item.coverImageUrl} alt={item.title} className="h-20 w-16 rounded-md object-cover"/>
+                                                <div className="ml-4 flex-1">
+                                                    <h3 className="text-md font-semibold text-stone-800">{item.title}</h3>
+                                                    <p className="text-sm text-stone-500">Qty: {item.quantity}</p>
+                                                </div>
+                                                <p className="text-md font-medium text-stone-900">${(item.price * item.quantity).toFixed(2)}</p>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <div className="border-t border-stone-200 pt-4 mt-4">
+                                         <div className="flex justify-between text-base font-medium text-stone-900">
+                                            <p>Total</p>
+                                            <p>${subtotal.toFixed(2)}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </PageWrapper>
+    );
+};
+
+const OrderConfirmationPage = () => {
+    const { setView, lastOrder } = useContext(AppContext);
+
+    return (
+        <PageWrapper>
+            <div className="bg-amber-50/50">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                    <div className="max-w-2xl mx-auto text-center bg-white p-10 rounded-lg shadow-xl border border-stone-200">
+                        <CheckCircleIcon className="w-16 h-16 text-green-500 mx-auto" />
+                        <h1 className="mt-6 text-4xl font-serif font-bold tracking-tight text-stone-900">Thank You!</h1>
+                        <p className="mt-4 text-lg text-stone-600">Your order has been confirmed. You can download your books below or find them anytime in "My Library".</p>
+                        
+                        <div className="mt-8 text-left">
+                             <h2 className="text-xl font-serif font-semibold text-stone-800">Your Downloads</h2>
+                             <ul className="mt-4 divide-y divide-stone-200 border-t border-b">
+                                {lastOrder.map(item => (
+                                    <li key={item.id} className="flex items-center justify-between py-4">
+                                        <div>
+                                            <h3 className="font-semibold">{item.title}</h3>
+                                            <p className="text-sm text-stone-500">{authors[item.authorId].name}</p>
+                                        </div>
+                                        <a href={item.downloadUrl} download className="flex items-center gap-2 rounded-md bg-stone-700 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-stone-800 transition-colors">
+                                            <ArrowDownTrayIcon className="w-5 h-5" />
+                                            Download
+                                        </a>
+                                    </li>
+                                ))}
+                             </ul>
+                        </div>
+
+                        <button 
+                            onClick={() => setView({ page: 'my-library' })}
+                            className="mt-8 w-full rounded-md bg-red-800 px-6 py-3 text-base font-semibold text-white shadow-lg hover:bg-red-700"
+                        >
+                            Go to My Library
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </PageWrapper>
+    );
+};
+
+const MyLibraryPage = () => {
+    const { purchasedBooks, setView } = useContext(AppContext);
+    
+    return (
+        <PageWrapper>
+            <div className="bg-amber-50/50">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 min-h-[60vh]">
+                    <div className="border-b-2 border-stone-300 pb-6 mb-10">
+                        <h1 className="text-4xl font-serif font-bold tracking-tight text-stone-900">My Library</h1>
+                        <p className="mt-4 text-base text-stone-600">All of your purchased books in one place.</p>
+                    </div>
+
+                    {purchasedBooks.length === 0 ? (
+                         <div className="text-center py-12">
+                            <p className="text-stone-600 text-lg">You haven't purchased any books yet.</p>
+                            <button 
+                                onClick={() => setView({ page: 'all-products'})}
+                                className="mt-4 rounded-md bg-red-800 px-6 py-3 text-base font-semibold text-white shadow-lg hover:bg-red-700"
+                            >
+                                Start Shopping
+                            </button>
+                        </div>
+                    ) : (
+                        <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                            {purchasedBooks.map((book) => (
+                                <BookCard key={book.id} book={book} />
+                            ))}
+                        </div>
+                    )}
+                </div>
+            </div>
+        </PageWrapper>
+    );
+};
+
 
 const NotFoundPage = () => {
     const { setView } = useContext(AppContext);
@@ -653,9 +1009,11 @@ const BackToTopButton = () => {
 
 // --- Main App Component ---
 export default function App() {
-  const [view, setView] = useState({ page: 'home', id: null });
+  const [view, setView] = useState({ page: 'home', id: null, query: '' });
   const [cart, setCart] = useState([]);
   const [wishlist, setWishlist] = useState([]);
+  const [purchasedBooks, setPurchasedBooks] = useState([]);
+  const [lastOrder, setLastOrder] = useState([]);
   const [toast, setToast] = useState({ show: false, message: '' });
 
   // Add fonts and animation styles to the document head
@@ -725,6 +1083,26 @@ export default function App() {
       });
   };
 
+  // Purchase Management
+  const handlePurchase = () => {
+      const newPurchases = cart.map(item => books.find(b => b.id === item.id));
+      setPurchasedBooks(prev => {
+          const existingIds = new Set(prev.map(b => b.id));
+          const uniqueNewPurchases = newPurchases.filter(b => !existingIds.has(b.id));
+          return [...prev, ...uniqueNewPurchases];
+      });
+      setLastOrder(cart);
+      setCart([]);
+      setView({ page: 'order-confirmation' });
+  };
+  
+  const handleBuyNow = (bookId) => {
+      const book = books.find(b => b.id === bookId);
+      if (!book) return;
+      setCart([{ ...book, quantity: 1 }]);
+      setView({ page: 'checkout' });
+  };
+
   const renderPage = () => {
     switch (view.page) {
       case 'home': return <HomePage />;
@@ -733,13 +1111,18 @@ export default function App() {
       case 'author': return <AuthorPage id={view.id} />;
       case 'cart': return <CartPage />;
       case 'wishlist': return <WishlistPage />;
+      case 'contact': return <ContactPage />;
+      case 'search-results': return <SearchResultsPage query={view.query} />;
+      case 'checkout': return <CheckoutPage />;
+      case 'order-confirmation': return <OrderConfirmationPage />;
+      case 'my-library': return <MyLibraryPage />;
       default: return <NotFoundPage />;
     }
   };
 
   useEffect(() => { window.scrollTo(0, 0); }, [view]);
 
-  const contextValue = { view, setView, cart, addToCart, updateCartQuantity, removeFromCart, wishlist, toggleWishlist };
+  const contextValue = { view, setView, cart, addToCart, updateCartQuantity, removeFromCart, wishlist, toggleWishlist, showToast, purchasedBooks, handlePurchase, lastOrder, handleBuyNow };
 
   return (
     <AppContext.Provider value={contextValue}>
@@ -765,3 +1148,4 @@ export default function App() {
     </AppContext.Provider>
   );
 }
+
